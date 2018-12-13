@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import { Marker } from 'google-maps-react'
 
+import AppHeader from './components/AppHeader'
+import MapCanvas from './components/MapCanvas'
+
 import './styles/App.css'
 
 class App extends Component {
