@@ -81,7 +81,7 @@ class App extends Component {
       <div className="App">
         <AppHeader />
 
-      {/* Run Loading code when isLoading state is true */}
+      {/* Run Loading splash when isLoading state is true */}
         { this.state.isLoading && <Loading /> }
 
         <MapCanvas
