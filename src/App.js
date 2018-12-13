@@ -76,6 +76,12 @@ class App extends Component {
       .catch(error => this.setState({ error, isLoading: false }))
   }
 
+  handleItemClick (id, ev) {
+    this.setState({ isLoading: true })
+    this.fetchVenue(id)
+  }
+
+  handleItemHover (ev) {}
 
   render() {
     const { venues, activeVenue } = this.state
