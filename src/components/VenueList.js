@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 
 import VenueItem from './VenueItem'
 
-import '../styles/VenueList.css'
+import '../styles/Venue.css'
 
 const VenueList = ({ venues, onClick, onHover }) => {
   return (
