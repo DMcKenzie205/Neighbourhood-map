@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Marker } from 'google-maps-react'
 
 import AppHeader from './components/AppHeader'
+import Loading from './components/Loading'
 import MapCanvas from './components/MapCanvas'
 
 import './styles/App.css'
@@ -79,6 +80,9 @@ class App extends Component {
     return (
       <div className="App">
         <AppHeader />
+
+      {/* Run Loading code when isLoading state is true */}
+        { this.state.isLoading && <Loading /> }
 
         <MapCanvas
           lat={54.973}
