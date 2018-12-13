@@ -5,6 +5,8 @@ import { Marker } from 'google-maps-react'
 import AppHeader from './components/AppHeader'
 import Loading from './components/Loading'
 import MapCanvas from './components/MapCanvas'
+import VenueDetails from './components/VenueDetails'
+import VenueList from './components/VenueList'
 
 import './styles/App.css'
 
@@ -84,6 +86,8 @@ class App extends Component {
       {/* Run Loading splash when isLoading state is true */}
         { this.state.isLoading && <Loading /> }
 
+       <VenueList venues={venues} onHover={this.handleItemHover} />
+
         <MapCanvas
           lat={54.973}
           lng={-1.613}
@@ -102,6 +106,7 @@ class App extends Component {
           )) }
         </MapCanvas>
 
+        { activeVenue && <VenueDetails { ...activeVenue } /> }
       </div>
     )
   }
