@@ -55,9 +55,19 @@ class App extends Component {
       .catch(error => this.setState({ error, isLoading: false }))
   }
 
+  fetchVenue(id) {
+    const endpointUrl = `${this.apiUrl}venues/${id}?${this.formatParams(this.params)}`
+
+    fetch(endpointUrl)
+      .then(response => response.json())
+      .then(data => this.setState({ activeVenue: data.response.venue, isLoading: false }))
+      .catch(error => this.setState({ error, isLoading: false }))
+  }
+
+
   render() {
-      const { venues, activeVenue } = this.state
-      return (
+    const { venues, activeVenue } = this.state
+    return (
       <div className="App">
         <AppHeader />
 
@@ -66,11 +76,23 @@ class App extends Component {
           lng={-1.613}
           zoom={16}
         >
-         
+          { venues.map(venue => (
+            <Marker
+              key={venue.id}
+              onClick={ev => this.handleItemClick(venue.id, ev)}
+              position={{
+                lat: venue.location.lat,
+                lng: venue.location.lng
+              }}
+              title={venue.name}
+            />
+          )) }
         </MapCanvas>
 
       </div>
     )
+  }
 }
+
 
 export default App
