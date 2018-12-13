@@ -15,6 +15,7 @@ class App extends Component {
       error: ''
     }
 
+    // Set foursquare API fixed parameters
     this.params = {
       client_id: 'BPKLFAGF2WNVNPNFPMCNPI0JXVMPIUGHMEGPPLUYVJRSYT3W',
       client_secret: 'YJ2NF5FBA4SE44YCZZRXBNTZQNAPCCJT4T5ZLREB3KSPAQ2G',
@@ -28,22 +29,26 @@ class App extends Component {
     this.fetchAllVenues()
   }
 
+  // Automatically create parameter string for foursquare API call
   formatParams(params) {
     return Object.keys(params)
             .map(key => `${key}=${params[key]}`)
             .join('&')
   }
 
+  // Fetch venue list based on variable parameters
   fetchAllVenues() {
     const params = {
       ...this.params,
       near: 'newcastle-upon-tyne',
       radius: 750,
-      limit: 50,
+      limit: 10,
       categories: '4d4b7104d754a06370d81259'
     }
+    // Create API Url
     const endpointUrl = `${this.apiUrl}venues/search?${this.formatParams(params)}`
 
+    // Fetch venue data based on API Url
     fetch(endpointUrl)
       .then(response => response.json())
       .then(data =>
@@ -55,6 +60,7 @@ class App extends Component {
       .catch(error => this.setState({ error, isLoading: false }))
   }
 
+  // Fetch id of each venue
   fetchVenue(id) {
     const endpointUrl = `${this.apiUrl}venues/${id}?${this.formatParams(this.params)}`
 
