@@ -1,7 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 
-import '../styles/Loading.css'
+import '../styles/App.css'
 
 const Loading = ({ singular }) => (
   <div className='Loading'>

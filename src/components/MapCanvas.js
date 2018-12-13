@@ -2,7 +2,7 @@ import React from 'react'
 import { Map, GoogleApiWrapper } from 'google-maps-react'
 import propTypes from 'prop-types'
 
-import '../styles/MapCanvas.css';
+import '../styles/App.css';
 
 // Import props from parent
 const MapCanvas = ({ google, children, lat, lng, zoom }) => {

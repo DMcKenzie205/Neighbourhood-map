@@ -1,0 +1,22 @@
+.AppHeader {
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  font-family: 'Rock Salt', cursive;
+  padding: 1rem;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 2;
+}
+
+.AppHeader svg {
+  margin-right: 1rem;
+}
+
+.AppHeader__title {
+  color: white;
+  font-size: calc(10px + 2vmin);
+  font-weight: bold;
+}
