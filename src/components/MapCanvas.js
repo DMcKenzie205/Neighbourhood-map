@@ -11,6 +11,9 @@ const MapCanvas = ({ google, children, lat, lng, zoom }) => {
   const bounds = new google.maps.LatLngBounds();
   children.map(child => bounds.extend({ lat: child.props.position.lat, lng: child.props.position.lng }))
 
+  const markerUrl = '/map-marker-alt-solid.svg'
+  const markerUrlActive = '/map-marker-alt-solid-active.svg'
+
   return (
     <div className='MapCanvas'>
       <Map
@@ -22,7 +25,12 @@ const MapCanvas = ({ google, children, lat, lng, zoom }) => {
         zoom={zoom}
       >
         { children.map(child => React.cloneElement(child, {
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.DROP,
+          icon: {
+            url: child.props.isActive ? markerUrlActive : markerUrl,
+            anchor: new google.maps.Point(16, 32),
+            scaledSize: new google.maps.Size(32, 32),
+          }
         })) }
       </Map>
     </div>

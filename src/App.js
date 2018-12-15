@@ -128,7 +128,11 @@ class App extends Component {
           onChange={this.handleCategoryChange}
         />
 
-       <VenueList venues={venues} onHover={this.handleItemHover} />
+        <VenueList 
+          venues={venues}
+          onClick={this.handleItemClick}
+          onHover={this.handleItemHover}
+        />
 
         <MapCanvas
           lat={54.973}
@@ -137,11 +141,15 @@ class App extends Component {
         >
           { venues.map(venue => (
             <Marker
+              isActive={activeVenue && venue.id === activeVenue.id}
               key={venue.id}
               onClick={ev => this.handleItemClick(venue.id, ev)}
               position={{
                 lat: venue.location.lat,
                 lng: venue.location.lng
+              }}
+              style={{
+                color: '#639'
               }}
               title={venue.name}
             />

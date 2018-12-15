@@ -14,7 +14,7 @@ const VenueList = ({ venues, onClick, onHover }) => {
           { venues.map(venue => (
             <VenueItem
               key={venue.id}
-              onClick={onClick}
+              onClick={(ev) => onClick(venue.id, ev)}
               onHover={onHover}
               {...venue}
             />)
