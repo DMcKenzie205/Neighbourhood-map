@@ -13,7 +13,8 @@
   margin: 1rem 0;
   padding: 1rem 2rem 1rem 1rem;
   position: fixed;
-  top: 0;
+  top: 4rem;
+  width: 265px;
   z-index: 2;
 }
 

@@ -6,7 +6,7 @@ const VenueDetails = ({ bestPhoto, description, name }) => (
   <div className='VenueDetails'>
     <div className='media'>
       <div className='media-left'>
-        <img src={`${bestPhoto.prefix}width300${bestPhoto.suffix}`} alt={name} />
+        { bestPhoto.prefix && <img src={`${bestPhoto.prefix}width300${bestPhoto.suffix}`} alt={name} /> }
       </div>
       <div className='media-body'>
         <h1 className='subtitle'>{name}</h1>

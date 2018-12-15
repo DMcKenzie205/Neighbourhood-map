@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Marker } from 'google-maps-react'
 
 import AppHeader from './components/AppHeader'
+import CategorySelector from './components/CategorySelector'
 import Loading from './components/Loading'
 import MapCanvas from './components/MapCanvas'
 import VenueDetails from './components/VenueDetails'
@@ -16,8 +17,10 @@ class App extends Component {
 
     this.state = {
       venues: [],
+      categories: [],
+      activeCategory: '4d4b7104d754a06370d81259',
       activeVenue: null,
-      isLoading: true,
+      isLoading: false,
       error: ''
     }
 
@@ -28,11 +31,15 @@ class App extends Component {
       v: '20181122'
     }
 
+    this.handleCategoryChange = this.handleCategoryChange.bind(this)
+    this.handleItemHover = this.handleItemHover.bind(this)
+    this.handleItemClick = this.handleItemClick.bind(this)
+
     this.apiUrl = `https://api.foursquare.com/v2/`
   }
 
   componentDidMount () {
-    this.fetchAllVenues()
+    this.fetchAllVenues(this.state.activeCategory)
   }
 
   // Automatically create parameter string for foursquare API call
@@ -43,13 +50,15 @@ class App extends Component {
   }
 
   // Fetch venue list based on variable parameters
-  fetchAllVenues() {
+  fetchAllVenues(categoryId) {
+    this.setState({ isLoading: true })
     const params = {
       ...this.params,
+      categoryId,
+
       near: 'newcastle-upon-tyne',
       radius: 750,
-      limit: 10,
-      categories: '4d4b7104d754a06370d81259'
+      limit: 15,
     }
     // Create API Url
     const endpointUrl = `${this.apiUrl}venues/search?${this.formatParams(params)}`
@@ -57,12 +66,20 @@ class App extends Component {
     // Fetch venue data based on API Url
     fetch(endpointUrl)
       .then(response => response.json())
-      .then(data =>
+      .then(data => {
+        const { categories } = this.state
+        const { venues } = data.response
+        const categoryList = {}
+        venues.forEach(({ categories }) => categoryList[categories[0].id] = categories[0])
+
         this.setState({
-          venues: data.response.venues,
+          venues,
+
+          activeCategory: categoryId,
+          categories: categories.length ? categories: Object.values(categoryList),
           isLoading: false,
         })
-      )
+      })
       .catch(error => this.setState({ error, isLoading: false }))
   }
 
@@ -76,6 +93,12 @@ class App extends Component {
       .catch(error => this.setState({ error, isLoading: false }))
   }
 
+  handleCategoryChange(ev) {
+    const { value } = ev.currentTarget
+
+    this.fetchAllVenues(value)
+  }
+
   handleItemClick (id, ev) {
     this.setState({ isLoading: true })
     this.fetchVenue(id)
@@ -84,13 +107,26 @@ class App extends Component {
   handleItemHover (ev) {}
 
   render() {
-    const { venues, activeVenue } = this.state
+    const { 
+      activeCategory,
+      activeVenue,
+      categories,
+      isLoading,
+      venues,
+    } = this.state
+
     return (
       <div className="App">
         <AppHeader />
 
       {/* Run Loading splash when isLoading state is true */}
-        { this.state.isLoading && <Loading /> }
+        { isLoading && <Loading /> }
+
+        <CategorySelector
+          active={activeCategory}
+          categories={categories}
+          onChange={this.handleCategoryChange}
+        />
 
        <VenueList venues={venues} onHover={this.handleItemHover} />
 
