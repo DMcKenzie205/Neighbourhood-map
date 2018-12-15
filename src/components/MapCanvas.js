@@ -21,7 +21,9 @@ const MapCanvas = ({ google, children, lat, lng, zoom }) => {
         style={{ height: '100%', position: 'relative', width: '100%', zIndex: 1 }}
         zoom={zoom}
       >
-        { children }
+        { children.map(child => React.cloneElement(child, {
+          animation: google.maps.Animation.DROP
+        })) }
       </Map>
     </div>
   )
