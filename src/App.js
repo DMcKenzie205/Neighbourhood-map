@@ -21,6 +21,7 @@ class App extends Component {
       activeCategory: '4d4b7104d754a06370d81259',
       activeVenue: null,
       isLoading: false,
+      menuIsOpen: true,
       error: ''
     }
 
@@ -130,7 +131,7 @@ class App extends Component {
 
         <VenueList 
           venues={venues}
-          onClick={this.handleItemClick}
+          onVenueClick={this.handleItemClick}
           onHover={this.handleItemHover}
         />
 

@@ -20,3 +20,14 @@
   font-size: calc(10px + 2vmin);
   font-weight: bold;
 }
+
+@media only screen and (max-width: 375px) {
+  .AppHeader {
+    height: 65px;
+    padding: 0;
+    width: 100%;
+    top: 0;
+    right: 0;
+    justify-content: center;
+  }
+}
