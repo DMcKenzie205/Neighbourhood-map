@@ -1,11 +1,11 @@
 /******************************************************************************
-  CSS for VenueList
+  css for VenueList
 */
 
 .VenueList {
   background-color: #282c34;
   border-radius: 0 0 .5rem 0;
-  bottom: 0;
+  bottom: 50px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,7 @@
 
 .VenueList.is-open {
   transform: translateX(0);
+  bottom: 50px;
 }
 
 .VenueList.is-open .burger {
@@ -71,7 +72,7 @@
 }
 
 /******************************************************************************
-  CSS for VenueDetails
+  css for VenueDetails
 */
 
 .VenueDetails {
@@ -91,19 +92,17 @@
 }
 
 
+/******************************************************************************
+  css for Responsive css
+*/
+
 @media only screen and (max-width: 375px) {
   .menu {
     transform: translateX(-100%);
     top: 105px;
   }
 
-  .CategorySelector {
-    top: 65px;
-    transform: translateX(-100%);
-  }
-
   .VenueList.is-open .CategorySelector {
-    top: 65px;
     transform: translate(0);
   }
 

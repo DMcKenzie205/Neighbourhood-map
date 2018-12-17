@@ -32,9 +32,11 @@ class App extends Component {
       v: '20181122'
     }
 
+    // Bind helper methods for use in other components
     this.handleCategoryChange = this.handleCategoryChange.bind(this)
     this.handleItemHover = this.handleItemHover.bind(this)
     this.handleItemClick = this.handleItemClick.bind(this)
+    this.fetchAllVenues = this.fetchAllVenues.bind(this)
 
     this.apiUrl = `https://api.foursquare.com/v2/`
   }
@@ -52,7 +54,7 @@ class App extends Component {
 
   // Fetch venue list based on variable parameters
   fetchAllVenues(categoryId) {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true, activeVenue: null })
     const params = {
       ...this.params,
       categoryId,
@@ -157,7 +159,7 @@ class App extends Component {
           )) }
         </MapCanvas>
 
-        { activeVenue && <VenueDetails { ...activeVenue } /> }
+        { activeVenue && <VenueDetails onClick={this.fetchAllVenues} { ...activeVenue } /> }
       </div>
     )
   }

@@ -52,8 +52,9 @@ body {
 .CategorySelector {
   background-color: #282c34;
   border-radius: 0 0 .5rem 0;
+  bottom: 0%;
   padding: 1rem 2rem 1rem 1rem;
-  position: absolute;
+  position: fixed;
   width: 265px;
   z-index: 2;
 }
